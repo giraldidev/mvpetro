@@ -119,22 +119,34 @@
                         <p>Snacks, bebidas, produtos de higiene e muito mais. Perfeito para uma parada rápida.</p>
                     </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="img/lavagem.jpg" alt="Lavagem de Veículos" loading="lazy">
+                <div class="service-card treats-card">
+                    <div class="slider-container">
+                        <div class="slider-wrapper" id="treats-slider">
+                            <div class="slide"><img src="img/alimento(1).png" alt="Gostosuras do Posto"></div>
+                            <div class="slide"><img src="img/alimento3.png" alt="Gostosuras do Posto"></div>
+                            <div class="slide"><img src="img/alimento4.png" alt="Gostosuras do Posto"></div>
+                            <div class="slide"><img src="img/alimento5.jpeg" alt="Gostosuras do Posto"></div>
+                            <div class="slide"><img src="img/tortacereja.jpeg" alt="Gostosuras do Posto"></div>
+                        </div>
+                        <div class="slider-nav">
+                            <button class="slider-btn prev" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-btn next" id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="slider-dots" id="slider-dots"></div>
                     </div>
                     <div class="service-info">
-                        <h3>Lavagem de Veículos</h3>
-                        <p>Lavagem simples e completa para deixar seu veículo brilhando. Cuidado em cada detalhe.</p>
+                        <h3>Gostosuras do Posto</h3>
+                        <p>Bateu aquela fome? Temos uma seleção incrível de salgados, doces e bebidas geladas esperando
+                            por você na nossa conveniência.</p>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="img/troca-oleo.jpg" alt="Troca de Óleo" loading="lazy">
+                        <img src="img/calibragem.jpg" alt="Calibragem de Pneus" loading="lazy">
                     </div>
                     <div class="service-info">
-                        <h3>Troca de Óleo</h3>
-                        <p>Óleo original e filtros de qualidade. Mão de obra especializada no seu veículo.</p>
+                        <h3>Calibragem de Pneus</h3>
+                        <p>Mantenha sua segurança e economize combustível. Serviço de calibragem gratuito e fácil de usar para todos os clientes.</p>
                     </div>
                 </div>
             </div>
@@ -423,6 +435,67 @@
             section.style.transition = 'all 0.8s ease-out';
             observer.observe(section);
         });
+
+        // Treats Slider Logic
+        const slider = document.getElementById('treats-slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dotsContainer = document.getElementById('slider-dots');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Create dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetTimer();
+        });
+
+        // Auto slide
+        let slideTimer = setInterval(nextSlide, 5000);
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(nextSlide, 5000);
+        }
     </script>
 
 </body>

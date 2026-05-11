@@ -267,6 +267,9 @@ section {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -274,7 +277,7 @@ section {
 }
 
 .service-img {
-    height: 200px;
+    height: 250px;
     overflow: hidden;
 }
 
@@ -291,12 +294,96 @@ section {
 
 .service-info {
     padding: 25px;
+    flex-grow: 1;
 }
 
 .service-info h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: var(--secondary);
+}
+
+/* Treats Slider Card */
+.treats-card {
+    /* Removido o span 2 para alinhar com os outros */
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Mesma altura que .service-img */
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 15px;
+    pointer-events: none;
+}
+
+.slider-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    pointer-events: auto;
+}
+
+.slider-btn:hover {
+    background: var(--primary);
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: var(--primary);
+    transform: scale(1.2);
 }
 
 /* Fuels */
